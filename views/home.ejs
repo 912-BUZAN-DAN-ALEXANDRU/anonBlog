@@ -4,24 +4,27 @@
 
 <%for(i in posts){%>
 
-<div class="card">
+<div class="card" id="<%= posts[i].id%>">
   <div class="card-header">
-    <h1><%= posts[i].title%></h1>
+    <h1 ><%= posts[i].title%></h1>
   </div>
   <div class="card-body">
       <p>
         <%if(posts[i].body.length > 1000){%>
         <%= posts[i].body.substring(0, 1000) + "..."%>
-        <a href="/posts/<%= posts[i].id%>">Read More</a>
+        <a name = "link" href="/posts/<%= posts[i].id%>">Read More</a>
         <%} else {%>
         <%= posts[i].body%>
         <%}%>
       </p>
   </div>
-  <div class="card-footer text-muted">
-    <a href="/copy"><button class="btn btn-primary" name="copyButton">Copy link</button></a>
-    <a href="/like"><button class="btn btn-primary" name="likeButton">Like</button></a>
-  </div>
+  <form class="" action="/copy" method="post">
+    <div class="card-footer text-muted">
+        <button type="submit" class="btn btn-primary" formaction="/copy/<%= posts[i].id%>/0">Copy link</button>
+        <button type="submit" class="btn btn-primary" formaction="/like/<%= posts[i].id%>/0">Like <%= posts[i].likes%></button>
+    </div>
+  </form>
+
 </div>
 <%}%>
 

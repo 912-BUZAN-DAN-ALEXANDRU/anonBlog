@@ -10,10 +10,12 @@
             <%= content%>
           </p>
       </div>
-      <div class="card-footer text-muted">
-        <a href="/copy"><button class="btn btn-primary" name="copyButton">Copy link</button></a>
-        <a href="/like"><button class="btn btn-primary" name="likeButton">Like</button></a>
-      </div>
+      <form class="" action="/copy" method="post">
+        <div class="card-footer text-muted">
+          <button type="submit" class="btn btn-primary" formaction="/copy/<%= id%>/1">Copy link</button>
+          <button type="submit" class="btn btn-primary" formaction="/like/<%= id%>/1">Like <%= likes%></button>
+        </div>
+      </form>
     </div>
 
 <%- include("partials/footer") -%>

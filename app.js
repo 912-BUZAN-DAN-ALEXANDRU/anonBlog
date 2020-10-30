@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const _ = require('lodash');
+const clipboardy = require('clipboardy');
+
 
 
 mongoose.set('useNewUrlParser', true);
@@ -30,7 +32,8 @@ app.use(express.static("public"));
 
 const postSchema = {
   title: String,
-  body: String
+  body: String,
+  likes: Number
 };
 
 const Post = mongoose.model("post", postSchema);
@@ -40,21 +43,14 @@ const Post = mongoose.model("post", postSchema);
 app.get("/", function(req, res){
   Post.find({}, function(err, posts){
     if(!err){
-      res.render("home", {
-                          posts: posts});
+      res.render("home", {posts: posts});
     }
   });
 
 
 });
 
-app.get("/about", function(req, res){
-  res.render("about", {textAbout: aboutContent});
-});
 
-app.get("/contact", function(req, res){
-  res.render("contact", {textContact: contactContent});
-});
 
 app.get("/compose", function(req, res){
   res.render("compose");
@@ -64,6 +60,8 @@ app.get("/posts/:id", function(req, res){
   Post.findById(req.params.id, function(err, post){
         res.render("post", {title: post.title,
           content: post.body,
+          likes: post.likes,
+          id: post._id
           });
         }
       );
@@ -72,18 +70,12 @@ app.post("/", function(req, res){
   res.redirect("/");
 });
 
-app.post("/about", function(req, res){
-  res.redirect("/");
-});
-
-app.post("/contact", function(req, res){
-  res.redirect("/");
-});
 
 app.post("/compose", function(req, res){
   const post= new Post({
     title: req.body.postTitle,
-    body: req.body.postBody
+    body: req.body.postBody,
+    likes: 0
   });
   console.log("posts/" + _.kebabCase(post.title))
   post.save(function(err){
@@ -94,7 +86,33 @@ app.post("/compose", function(req, res){
 });
 
 
+app.post("/copy/:id/:ps", function(req, res){
 
+    clipboardy.writeSync("https://www." + req.hostname + "/posts/" + req.params.id);
+    if(req.params.ps == 0){
+      res.redirect("/#" + req.params.id);
+    }
+    else
+    {
+      res.redirect("/posts/" + req.params.id);
+    }
+
+});
+
+app.post("/like/:id/:ps", function(req, res){
+
+
+  Post.findById(req.params.id, function(err, res){
+      Post.updateOne({_id:req.params.id}, {likes: res.likes + 1}, function(ERR, RES){});
+    });
+  if(req.params.ps == 0){
+    res.redirect("/#" + req.params.id);
+  }
+  else
+  {
+    res.redirect("/posts/" + req.params.id);
+  }
+});
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
