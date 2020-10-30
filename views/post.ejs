@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<%- include("partials/header") -%>
+    <div class="card">
+      <div class="card-header">
+        <h1><%= title%></h1>
+      </div>
+      <div class="card-body">
+          <p>
+            <%= content%>
+          </p>
+      </div>
+      <div class="card-footer text-muted">
+        <a href="/copy"><button class="btn btn-primary" name="copyButton">Copy link</button></a>
+        <a href="/like"><button class="btn btn-primary" name="likeButton">Like</button></a>
+      </div>
+    </div>
+
+<%- include("partials/footer") -%>
