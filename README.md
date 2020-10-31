@@ -20,3 +20,16 @@ MongoDB, Mongoose
 EJS
 ### Deploy
 Heroku ---> https://desolate-sea-26329.herokuapp.com/
+
+---
+
+# Problems
+
+1. The same person give an infinite number of likes to a post
+2. Without an account, the person who post something can not modify it afterwards
+
+# Future plans
+!. Solve the problem number 1
+2. Implement Sign-up and Log in functionalities
+3. Implement a "SHARE" button
+4. Implement a comment interface for each post
