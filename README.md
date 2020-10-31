@@ -30,6 +30,7 @@ Heroku ---> https://desolate-sea-26329.herokuapp.com/
 
 1. The same person give an infinite number of likes to a post
 2. Without an account, the person who post something can not modify it afterwards
+2. "Copy link" button not functional yet
 ---
 # Future plans
 !. Solve the problem number 1 <br>
