@@ -29,7 +29,7 @@ Heroku ---> https://desolate-sea-26329.herokuapp.com/
 2. Without an account, the person who post something can not modify it afterwards
 
 # Future plans
-!. Solve the problem number 1
-2. Implement Sign-up and Log in functionalities
-3. Implement a "SHARE" button
-4. Implement a comment interface for each post
+!. Solve the problem number 1 <br>
+2. Implement Sign-up and Log in functionalities <br>
+3. Implement a "SHARE" button <br>
+4. Implement a comment interface for each post <br>
